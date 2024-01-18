@@ -33,6 +33,12 @@ pipeline {
                 }
             }
         }
-
+ stage ('Deploy Docker Container') {
+            steps {
+                script{
+                sh 'docker run -d gestionpersonnelcontainer -p 8888:8080 rami178/gestionpersonnel'
+                }
+            }
+        }
   }
 }
