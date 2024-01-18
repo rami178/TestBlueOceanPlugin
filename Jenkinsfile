@@ -15,7 +15,21 @@ pipeline {
             }
         }
 
-       
+        stage('stop and delete old container') {
+            steps {
+                script { 
+                     sh 'docker stop container'
+                     sh 'docker rm container'
+                }  
+                }
+            }
+         stage('delete old images') {
+            steps {
+                script { 
+                    sh 'docker image rm -f rami178/gestionpersonnel'
+                }  
+                }
+            }
   
         stage ('Build Docker Image') {
             steps {
