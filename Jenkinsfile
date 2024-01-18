@@ -23,6 +23,16 @@ pipeline {
                 }
             }
         }
+           stage ('Push Docker Image') {
+            steps {
+                script{
+                withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+                 sh 'docker login -u rami178 -p ${dockerhubpwd}'
+                    sh 'docker push rami178/gestionpersonnel'
+                  }
+                }
+            }
+        }
 
   }
 }
