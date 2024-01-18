@@ -8,7 +8,7 @@ pipeline {
         TAG = "${DATE}.${BUILD_NUMBER}"
     }
     stages {
-        stage('Checkout from GitHub')
+        stage('Checkout from GitHub'){
         steps{
             
         }
