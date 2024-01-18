@@ -15,13 +15,19 @@ pipeline {
             }
         }
 
-        stage('Clean old Image') {
+        stage('stop and delete old container') {
             steps {
                 script { 
-                    echo ">>>>>>>>> Start Clearing old containers "
-docker ps -a | grep "gestionpersonnel*" | awk '{print $1}' | xargs docker rm -f
-
-                    }  
+                    sh 'docker stop container'
+                    sh 'docker rm container'  
+                }  
+                }
+            }
+         stage('delete old images') {
+            steps {
+                script { 
+                    sh 'docker image rm -f rami178/gestionpersonnel'
+                }  
                 }
             }
   
