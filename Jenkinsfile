@@ -12,6 +12,7 @@ pipeline {
         steps{
             
         }
+        }
         stage ('Build') {
             steps {
               checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rami178/Gestion-Personnel.git']])
