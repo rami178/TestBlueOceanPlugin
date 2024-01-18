@@ -18,22 +18,12 @@ pipeline {
         stage('Clean old Image') {
             steps {
                 script { 
-                    def imageName = "${registry}" + "/" + "${branchName}"
-                    env.imageName = "${imageName}"
-                    def oldImageID = sh( 
-                                            script: 'docker images -qf reference=\${imageName}:\${imageTag}',
-                                            returnStdout: true
-                                        )
-
-                    echo "Image Name: " + "${imageName}"
-                    echo "Old Image: ${oldImageID}"
-
-                    if ( "${oldImageID}" != '' ) {
-                        echo "Deleting image id: ${oldImageID}..."
-                        sh "docker rmi -f $oldImageID"
-                    } else {
-                        echo "No image to delete..."
-                        } 
+                    echo ">>>>>>>>> Start Clearing old containers "
+if docker ps -a | grep "gestionpersonnel*" | awk '{print $1}' | xargs docker rm -f; then
+    printf 'Clearing old containers done succeeded\n'
+else
+    printf 'Clearing old containers failed\n'
+fi
                     }  
                 }
             }
