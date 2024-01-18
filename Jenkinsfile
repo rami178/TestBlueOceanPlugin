@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage ('Build') {
                tools {
-                   jdk "jdk-1.8.101"
+                   jdk 'jdk-1.8.101'
                 }
             steps {
               checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rami178/Gestion-Personnel.git']])
