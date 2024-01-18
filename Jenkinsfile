@@ -2,7 +2,6 @@ pipeline {
     agent any
     tools {
         maven 'Maven-3.9.6'
-        jdk 'java-8.0.292'
     }
     environment {
         DATE = new Date().format('yy.M')
@@ -10,6 +9,9 @@ pipeline {
     }
     stages {
         stage ('Build') {
+               tools {
+                   jdk "jdk-1.8.101"
+                }
             steps {
               checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rami178/Gestion-Personnel.git']])
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package'
@@ -34,7 +36,7 @@ pipeline {
                 }
             }
         }
- stage('Run') {
+            stage('Run') {
             steps {
                 sh 'docker run -d --name container -p 8087:8080 rami178/gestionpersonnel'
             }
