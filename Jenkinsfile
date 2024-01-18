@@ -35,7 +35,7 @@ pipeline {
         }
  stage('Run') {
             steps {
-                sh 'docker run -d -p 8000:8080 --container rami178/gestionpersonnel'
+                sh 'docker run -d --name container -p 8087:8080 rami178/gestionpersonnel'
             }
         }
   }
