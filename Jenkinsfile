@@ -16,4 +16,14 @@ pipeline {
         }
 
   }
+   stages {
+        stage ('Build Docker Image') {
+            steps {
+                script{
+                sh 'docker build -t rami178/gestionpersonnel .'
+                }
+            }
+        }
+
+  }
 }
