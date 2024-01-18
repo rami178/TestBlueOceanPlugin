@@ -18,8 +18,12 @@ pipeline {
         stage('stop and delete old container') {
             steps {
                 script { 
+                    if docker ps -a | grep "container*"then
                     sh 'docker stop container'
                     sh 'docker rm container'  
+                    else
+                    printf 'Clearing old containers failed\n'
+                    fi
                 }  
                 }
             }
