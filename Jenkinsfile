@@ -42,9 +42,9 @@ pipeline {
       }
     }
 
-    stage('Push Docker Image') {
+    stage('Push image to dockerhub and Deploy the Application') {
       parallel {
-        stage('Push Docker Image') {
+        stage('Push Image to Dockerhub') {
           steps {
             script {
               withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
@@ -56,18 +56,12 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('Run Container') {
           steps {
-            sh 'echo "hello"'
+        sh 'docker run -d --name container -p 8087:8080 rami178/gestionpersonnel'
           }
         }
 
-      }
-    }
-
-    stage('Run') {
-      steps {
-        sh 'docker run -d --name container -p 8087:8080 rami178/gestionpersonnel'
       }
     }
 
